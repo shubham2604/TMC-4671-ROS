@@ -19,7 +19,8 @@ As per the official documentation, there can be four types of hardware interface
 
 The Interfaces can be best understood by the following image,
 
-![ROS hardware interface memory concepts, source : https://roscon.ros.org/2014/wp-content/uploads/2014/07/ros_control_an_overview.pdf](https://github.com/shubham2604/TMC-4671-ROS/blob/master/Images/HW_interface_Mem_loc.png)
+ROS hardware interface memory concepts, source : [ros_control](https://roscon.ros.org/2014/wp-content/uploads/2014/07/ros_control_an_overview.pdf) :
+![alt text](https://github.com/shubham2604/TMC-4671-ROS/blob/master/Images/HW_interface_Mem_loc.png)
 
 As evident from the image, ROS control communicate with the actuators and the motors using the memory locations. For example, if the motor has to be commanded using the position interface, ROS control would simply write the position demand value at "pos_cmd_" memory location which would be then transmitted to the motor via the the communication interface of the motor. In case of TMC4671 eval kit with Landungsbrücke, these interfaces can be RS232, USB serial, or RN171XV/RN42XV wireless modules. Similarly, for velocity and effort interfaces the demand values get written to these memory locations which are pre-defined. Now, the question that remains is, how does the joint states are read from the motor. It is also anologous to the joint command interface where the joint values are read into the "pos_", "vel_" and "eff_" memory locations.
 
