@@ -52,7 +52,7 @@ Initially setup TMC4671 according to the motor using TMC IDE, the process is nic
 The most important part while using position control with TMC4671 is to tune PI gains for velocity and position control loops. These loops can be manually tuned using `0x58` and `0x5A` registers. However, it is strongly not advised.
 
 
-**References**
-S. Chitta, E. Marder-Eppstein, W. Meeussen, V. Pradeep, A. Rodríguez Tsouroukdissian, J. Bohren, D. Coleman, B. Magyar, G. Raiola, M. Lüdtke and E. Fernandez Perdomo
+## **References**
 
+1. S. Chitta, E. Marder-Eppstein, W. Meeussen, V. Pradeep, A. Rodríguez Tsouroukdissian, J. Bohren, D. Coleman, B. Magyar, G. Raiola, M. Lüdtke and E. Fernandez    Perdomo
 -   "ros_control: A generic and simple control framework for ROS"
