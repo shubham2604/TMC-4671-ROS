@@ -34,3 +34,21 @@ Now its just matter of updating these memory locations at certain interval to co
     };
 Here, the constructor can be used to initialize for example, communication interfaces (Serial in case of our implementation with Landungsbrücke). Moving further, both `trinamic::read()` and `trinamic::write()` functions are called periodically in a loop so that the memory locations are updated at a fixed interval. 
 
+
+
+## ROS controllers
+Once the hardware Interfaces are up and running, we can spawn one of the many controllers such as `position_controllers`,  `velocity_controllers`, `joint_state_controller`, `joint_trajectory_controller`. These controllers are nothing but an abstraction of hardware interfaces as ROS topics. Here, as mentioned above, position_controller can be started with velocity joint interface such that the control loop is running on the host machine. Furthermore, joint_trajectory_controller is compatible with all types of joint command interfaces. One thing to note is that we should always check for conficts such that no two controllers are accessing the same hardware interfaces. 
+
+## Establishing communication between ROS control and TMC4671
+
+Thanks to TMCL API, establishing communication between ROS and TMC4671 via Landungsbrücke become effortless. As mentioned previously, the communication is established using USB serial communication that accepts command position (since we are creating hardware interface) and transmits joint position. Once Landungsbrücke receive this command position, it writes this value in register `0x68, PID_POSITION_TARGET` via SPI. Furthermore, the current position value is taken from register `0x6B, PID_POSITION_ACTUAL` and transmitted via USB serial. Since all these values are 32 bit signed integers, the data is marshalled into 4 single byte unsigned integers for both sending and receiving. 
+
+## How to setup everything
+
+Initially setup TMC4671 according to the motor using TMC IDE, the process is nicely explained [here](https://youtu.be/g2BHEdvW9bU). Update the C settings received from IDE in `init_motor()` function of [ROS_control.c](https://github.com/shubham2604/TMC-4671-ROS/blob/master/Landungsbr%C3%BCcke/ROS_control.c). Now download the ROS package to start the hardware interface. Any compatible ROS controller can be spawned along with the ROS control node in the launch file. The controller can be configured in the controller.yaml.
+
+The most important part while using position control with TMC4671 is to tune PI gains for velocity and position control loops. These loops can be manually tuned using `0x58` and `0x5A` registers. However, it is strongly not advised.
+
+
+
+
