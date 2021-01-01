@@ -45,7 +45,7 @@ Thanks to TMCL API, establishing communication between ROS and TMC4671 via Landu
 
 ## How to setup everything
 
-Initially setup TMC4671 according to the motor using TMC IDE, the process is nicely explained [here](https://youtu.be/g2BHEdvW9bU). Update the C settings received from IDE in `init_motor()` function of [ROS_control.c](https://github.com/shubham2604/TMC-4671-ROS/blob/master/Landungsbr%C3%BCcke/ROS_control.c). Now download the ROS package to start the hardware interface. Any compatible ROS controller can be spawned along with the ROS control node in the launch file. The controller can be configured in the controller.yaml.
+Initially setup TMC4671 according to the motor using TMC IDE, the process is nicely explained [here](https://youtu.be/g2BHEdvW9bU). Update the C settings received from IDE in `init_motor()` function of [ROS_control.c](https://github.com/shubham2604/TMC-4671-ROS/blob/master/Landungsbr%C3%BCcke/ROS_control.c). Now download the [ROS package](https://github.com/shubham2604/TrinamicProject) in any workspace and start the hardware interface using [launch file](https://github.com/shubham2604/TrinamicProject/blob/master/launch/tmc_servo.launch). Any compatible ROS controller can be spawned along with the ROS control node in the launch file. The controller can be configured in the controller.yaml.
 
 The most important part while using position control with TMC4671 is to tune PI gains for velocity and position control loops. These loops can be manually tuned using `0x58` and `0x5A` registers. However, it is strongly not advised.
 
